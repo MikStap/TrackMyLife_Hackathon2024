@@ -24,18 +24,18 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="viewData"
         options={{
-          title: 'Explore',
+          title: 'Visualise',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
           ),
         }}
       />
        <Tabs.Screen
-        name="more"
+        name="info"
         options={{
-          title: 'More',
+          title: 'Info',
           tabBarIcon: ({ color, focused }) => (
             <FancyTabBarIcon name={focused ? 'exclamationcircle' : 'exclamationcircleo'} color={color} />
           ),
