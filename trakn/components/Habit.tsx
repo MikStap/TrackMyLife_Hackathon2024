@@ -1,55 +1,40 @@
-import Entypo from '@expo/vector-icons/Entypo';
-import { PropsWithChildren, useState, useEffect } from 'react';
-import { StyleSheet, TouchableOpacity, useColorScheme, View } from 'react-native';
+import { PropsWithChildren, useEffect, Component, ReactElement } from 'react';
+import { StyleSheet, TouchableOpacity, useColorScheme } from 'react-native';
 
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Colors } from '@/constants/Colors';
+import { type Icon } from '@expo/vector-icons/build/createIconSet';
 
-export function Habit({ children, title }: PropsWithChildren & { title: string }) {
+type Props = PropsWithChildren<{
+  title: string;
+  habitColor: string;
+  icon: ReactElement;
+}>;
+
+export function Habit({ children, title, habitColor, icon}: PropsWithChildren & Props) {
   const theme = useColorScheme() ?? 'light';
 
   return (
     
     <ThemedView>
       <TouchableOpacity 
-      style={theme === 'light' ? styles.rectangleLightDefault : styles.rectangleDarkDefault}
+      style={[
+        styles.rectangle,
+        { backgroundColor: habitColor }
+        ]}
       activeOpacity={0.5}>
-        <ThemedView style={styles.button}>
-          <Entypo
-            name={'plus'}
-            size={75}
-            color={theme === 'light' ? Colors.light.icon : Colors.dark.icon}
-          />
-          <ThemedText type="defaultSemiBold">{title}</ThemedText>
-        </ThemedView>
+
+        {icon}
+        <ThemedText type="defaultSemiBold">{title}</ThemedText>
       </TouchableOpacity>
     </ThemedView>
   );
 }
 
 const styles = StyleSheet.create({
-  heading: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-  },
-  button: {
-    alignItems: 'center',
-  },
-  rectangleLightDefault: {
+  rectangle: {
     borderWidth: 1, // draw border for view => border of the rectangle
-    backgroundColor: Colors.light.background,
-    borderColor: Colors.dark.icon,
-    borderRadius: 15,
-    justifyContent: 'center', // centered by height
-    alignItems: 'center', // centered by width
-    height: 140,
-    width: 140,
-  },
-  rectangleDarkDefault: {
-    borderWidth: 1, // draw border for view => border of the rectangle
-    backgroundColor: Colors.dark.background,
     borderColor: Colors.dark.icon,
     borderRadius: 15,
     justifyContent: 'center', // centered by height
