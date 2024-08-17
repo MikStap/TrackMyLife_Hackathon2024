@@ -1,13 +1,15 @@
-import { Image, Pressable, StyleSheet, useColorScheme, View, } from 'react-native';
+import { Image, Pressable, StyleSheet, View, } from 'react-native';
+import { useColorScheme } from "nativewind";
 import Entypo from '@expo/vector-icons/Entypo';
 import { Colors } from '@/constants/Colors';
+import { LightMode } from '@/components/LightMode';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Link } from 'expo-router';
 
-export default function SetupScreen() {
-  const theme = useColorScheme() ?? 'light';
-  const color = theme === 'light' ? '#A1CEDC' : '#1D3D47'
+export default function SetupScreen() { 
+  const { colorScheme, toggleColorScheme } = useColorScheme()
+  const color = colorScheme === 'light' ? '#A1CEDC' : '#1D3D47'
   return (
     <ThemedView style={styles.container}>
       <View
@@ -15,18 +17,26 @@ export default function SetupScreen() {
           styles.header,
           { backgroundColor: color},
         ]}>
-          <Link href="/" asChild>
-          <Pressable>
-          <Entypo
-          name={'back'}
-          size={75}
-          color={theme === 'light' ? Colors.light.icon : Colors.dark.icon}
-          style={styles.back}/>
-          </Pressable>
-          </Link>
+          <View style={[{flexDirection: 'row'}]}>
+            <Link href="/">
+              <Pressable>
+                <Entypo
+                name={'back'}
+                size={75}
+                color={colorScheme === 'light' ? Colors.light.icon : Colors.dark.icon}
+                style={styles.back}/>
+              </Pressable>
+            </Link>
+            <div style={styles.spacer}></div>
+           <LightMode></LightMode>
+        </View>
       </View>
       <ThemedView style={styles.content}>
-        <ThemedText type="title">Setup Page!</ThemedText>
+        <ThemedText type="title">New Habit</ThemedText>
+        <div style={styles.row}>
+        <ThemedText>Label  </ThemedText>
+        <input></input>
+        </div>
       </ThemedView>
   </ThemedView>
 );
@@ -59,5 +69,11 @@ const styles = StyleSheet.create({
   back: {
     margin: 10,
     marginLeft: 30,
+  },
+  row: {
+    flexDirection: 'row',
+  },
+  spacer: {
+    flexGrow:2
   }
 });

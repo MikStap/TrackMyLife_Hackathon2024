@@ -1,5 +1,6 @@
 import type { PropsWithChildren, ReactElement } from 'react';
-import { StyleSheet, useColorScheme } from 'react-native';
+import { StyleSheet, } from 'react-native';
+import { useColorScheme } from "nativewind";
 import Animated, {
   interpolate,
   useAnimatedRef,
@@ -8,6 +9,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { ThemedView } from '@/components/ThemedView';
+import { LightMode } from './LightMode';
 
 const HEADER_HEIGHT = 50;
 
@@ -19,7 +21,7 @@ export default function NormalScrollView({
   children,
   headerBackgroundColor,
 }: Props) {
-  const colorScheme = useColorScheme() ?? 'light';
+  const { colorScheme, toggleColorScheme } = useColorScheme()
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const scrollOffset = useScrollViewOffset(scrollRef);
 
@@ -47,8 +49,10 @@ export default function NormalScrollView({
           style={[
             styles.header,
             { backgroundColor: headerBackgroundColor[colorScheme] },
-            headerAnimatedStyle
-          ]}>
+            headerAnimatedStyle,
+            ]}>
+          <div style={styles.spacer}> </div>
+          <LightMode></LightMode>
         </Animated.View>
         <ThemedView style={styles.content}>{children}</ThemedView>
       </Animated.ScrollView>
@@ -63,6 +67,7 @@ const styles = StyleSheet.create({
   header: {
     height: 100,
     overflow: 'hidden',
+    flexDirection: "row"
   },
   content: {
     flex: 1,
@@ -70,4 +75,11 @@ const styles = StyleSheet.create({
     gap: 16,
     overflow: 'hidden',
   },
+  headerRight: {
+    flexDirection: 'row',
+    alignContent: 'flex-end'
+  },
+  spacer: {
+    flexGrow:2
+  }
 });

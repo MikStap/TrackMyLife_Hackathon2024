@@ -1,5 +1,6 @@
 import { PropsWithChildren, ReactElement } from 'react';
-import { StyleSheet, TouchableOpacity, Pressable, useColorScheme } from 'react-native';
+import { StyleSheet, TouchableOpacity, Pressable, } from 'react-native';
+import { useColorScheme } from "nativewind";
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Colors } from '@/constants/Colors';
@@ -13,7 +14,7 @@ type Props = PropsWithChildren<{
 }>;
 
 export function Habit({ children, title, habitColor, icon, link}: PropsWithChildren & Props) {
-  const theme = useColorScheme() ?? 'light';
+  const { colorScheme, toggleColorScheme } = useColorScheme()
 
   return (
     
