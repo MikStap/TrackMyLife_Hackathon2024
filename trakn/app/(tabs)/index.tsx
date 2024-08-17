@@ -15,8 +15,8 @@ export default function HomeScreen() {
         <View style={ [{flexDirection: 'row'}] }>
           <Habit 
           title = "New" 
-          habitColor = "blue"
-          link = "/_sitemap"
+          habitColor = {theme === 'light' ? Colors.light.background : Colors.dark.background}
+          link = "/setup1"
           icon = {<Entypo
           name={'plus'}
           size={75}
@@ -25,9 +25,9 @@ export default function HomeScreen() {
           >
           </Habit>
           <Habit 
-          title = "2nd" 
+          title = "Sitemap" 
           habitColor = "green"
-          link = "/(tabs)setup1"
+          link = "/_sitemap"
           icon = {<AntDesign
           name={'exclamationcircleo'}
           size={75}
