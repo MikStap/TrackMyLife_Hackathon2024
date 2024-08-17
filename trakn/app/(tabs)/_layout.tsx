@@ -41,6 +41,12 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+      name="setup1"
+      options={{
+        tabBarButton:()=>null
+      }}
+      />
     </Tabs>
   );
 }
